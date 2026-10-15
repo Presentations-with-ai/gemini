@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#100b2a">
+<meta name="robots" content="noindex,nofollow">
+<title>Розыгрыш приза · Проверь свой билет</title>
+<style>
+  :root { color-scheme:dark; --white:#fff; --muted:#c8c0e4; }
+  * {box-sizing:border-box}
+  html {min-height:100%;background:#100b2a}
+  body {margin:0;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;color:#fff;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden;background:radial-gradient(circle at 10% 3%,#5935a9 0,transparent 31%),radial-gradient(circle at 95% 14%,#0e868a 0,transparent 28%),radial-gradient(circle at 52% 105%,#59216e 0,transparent 32%),#100b2a}
+  body:before {content:"";position:fixed;inset:0;pointer-events:none;opacity:.20;background-image:radial-gradient(#ffffff 0.6px, transparent 0.6px);background-size:24px 24px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
+  .orbs {position:fixed;inset:0;pointer-events:none;overflow:hidden}.orb{position:absolute;aspect-ratio:1;border-radius:50%;filter:blur(2px);opacity:.43;animation:float 9s ease-in-out infinite alternate}.orb.a{width:190px;background:linear-gradient(135deg,#9d5af7,#5bb6e8);top:-80px;right:-70px}.orb.b{width:130px;background:#d15dec;left:-70px;bottom:10%;animation-delay:-4s}.orb.c{width:35px;background:#89eef6;left:12%;top:17%;animation-delay:-2s}
+  @keyframes float {to{transform:translate(18px,36px) rotate(25deg)}}
+  .page {position:relative;z-index:1;width:min(100%,540px);padding:28px 22px 26px;display:flex;flex-direction:column;align-items:center}
+  .brand {display:flex;gap:10px;align-items:center;justify-content:center;margin-bottom:30px;font-weight:770;letter-spacing:.02em;font-size:14px;color:#eee6ff}.brand-mark{width:35px;height:35px;border-radius:12px;background:conic-gradient(from 55deg,#36d1dc,#6b78ed,#c86cd7,#36d1dc);display:grid;place-items:center;font-weight:900;font-size:23px;box-shadow:0 6px 20px #20cad340}.brand-name{opacity:.82;font-weight:600}
+  .glass {width:100%;position:relative;isolation:isolate;overflow:hidden;text-align:center;padding:39px 27px 35px;background:linear-gradient(143deg,rgba(255,255,255,.16),rgba(255,255,255,.062) 49%,rgba(255,255,255,.09));border:1px solid rgba(255,255,255,.27);border-radius:32px;box-shadow:0 24px 90px #06021978, inset 0 1px #ffffff24;backdrop-filter:blur(15px)}
+  .glass:before {content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 55% -2%,rgba(255,255,255,.23),transparent 38%)}
+  .eyebrow {font-weight:760;color:#cabaff;font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin:4px auto 21px}
+  .medallion {height:124px;width:124px;margin:0 auto 27px;border-radius:50%;display:grid;place-items:center;border:1px solid #ffffff45;background:linear-gradient(130deg,rgba(255,255,255,.28),rgba(255,255,255,.04));box-shadow:0 9px 40px #130d356a,inset 0 1px #ffffff66}
+  .medallion svg{width:66px;height:66px;filter:drop-shadow(0 7px 12px #150d4466)}
+  h1 {font-size:clamp(35px,8vw,49px);font-weight:860;letter-spacing:-.052em;line-height:1.08;margin:0 auto 19px;max-width:400px}
+  h1 .accent {background:linear-gradient(100deg,#9be8fc,#deaaff);color:transparent;background-clip:text}
+  h1 .accent{display:block}
+  .description{color:#e1d9ee;font-size:16px;line-height:1.6;max-width:340px;margin:0 auto}
+  .chip[hidden]{display:none!important}
+  .chip {display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 14px;color:#ebddff;background:#ffffff17;border:1px solid #ffffff2d;font-size:12px;font-weight:750;margin:28px auto 0}.spark{color:#ffdc87;font-size:17px}
+  .hint {font-size:12px;color:#aaa3c4;line-height:1.6;margin:28px auto 0;text-align:center;max-width:390px}
+  .foot {display:flex;align-items:center;justify-content:center;gap:7px;color:#b0a2d1;margin-top:22px;font-size:11px;letter-spacing:.015em}
+  .glass.win {background:linear-gradient(143deg,rgba(40,166,154,.27),rgba(115,67,184,.18) 60%,rgba(255,211,114,.16));border-color:#b7f5e5a1}.glass.win .eyebrow{color:#d4fff1}.glass.win .medallion{background:linear-gradient(135deg,#f7d67e,#ffc46f 45%,#f8f2bc);box-shadow:0 0 58px #f4d17849}.glass.win .medallion svg{filter:drop-shadow(0 7px 9px #845a4450)}.glass.win h1 .accent{background:linear-gradient(100deg,#d6fff3,#ffe89e);color:transparent;background-clip:text}
+  .glass.lose .medallion{background:linear-gradient(135deg,#5a4a96,#312b69)}.glass.lose h1 .accent{background:linear-gradient(100deg,#ccb7ff,#d8e1ff);color:transparent;background-clip:text}
+  .glass.invalid .medallion{background:linear-gradient(135deg,#4e4976,#30254f)}
+  #confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:8}.piece{position:absolute;top:-30px;width:9px;height:17px;border-radius:2px;animation:fall var(--dur) linear forwards;left:var(--x);background:var(--c);transform:rotate(var(--r));opacity:.94}@keyframes fall{100%{transform:translate(var(--dx),105vh) rotate(850deg);opacity:.9}}
+  .loading .medallion{animation:pulse 1.2s ease-in-out infinite}@keyframes pulse{50%{transform:scale(.94);opacity:.65}}
+  @media (max-width:390px){.page{padding:22px 15px}.glass{padding:31px 20px}.brand{margin-bottom:21px}.medallion{width:111px;height:111px;margin-bottom:21px}.description{font-size:15px}}
+  @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+  /* Имя участника и шестисекундная проверка */
+  #entry[hidden], #result-body[hidden],#result-id[hidden],#loading-progress[hidden],#share-actions[hidden]{display:none!important}
+  .entry-title{font-size:30px;line-height:1.14;letter-spacing:-.04em;margin:0 0 12px;color:#fff}
+  .entry-info{font-size:14px;line-height:1.7;color:#ded7f2;margin:0 0 20px}
+  .entry-label{display:block;text-align:left;color:#f3eeff;font-size:13px;font-weight:800;margin:0 0 8px}
+  .entry-input{display:block;width:100%;height:55px;border:1px solid #a99bde88;border-radius:16px;background:#130c2f;color:#fff;font:inherit;padding:0 16px;font-size:17px;outline:0}
+  .entry-input:focus{border-color:#6de8f9;box-shadow:0 0 0 4px #6de8f91b}
+  .entry-submit,.share-btn{display:block;width:100%;border:0;border-radius:16px;padding:16px 12px;background:linear-gradient(115deg,#69e8f2,#b18eff,#efabfb);font:inherit;font-size:15px;font-weight:850;color:#1d1138;cursor:pointer;text-decoration:none;text-align:center}
+  .entry-submit{margin-top:16px}.entry-submit:disabled{opacity:.6;cursor:wait}
+  .entry-error{color:#ffc0d5;min-height:21px;font-size:12px;margin:10px 0 0;line-height:1.4}
+  .progress-track{width:100%;height:9px;border-radius:99px;background:#ffffff30;overflow:hidden;margin:24px 0 11px}
+  .progress-fill{width:0%;height:100%;background:linear-gradient(90deg,#64f3ef,#c38af6,#ffdf9a);border-radius:99px}
+  .progress-fill.running{animation:scanProgress 6s linear both}
+  @keyframes scanProgress{to{width:100%}}
+  .progress-state{font-size:12px;color:#f2e8ff;min-height:19px}
+  .result-id{display:inline-flex;border:1px solid #f8dea45e;background:#2a1758;padding:9px 14px;color:#ffe6ad;letter-spacing:.09em;font-size:12px;font-weight:900;border-radius:99px;margin-top:18px}
+  .share-actions{display:grid;gap:10px;margin-top:15px}
+  .share-btn.secondary{background:#ffffff15;border:1px solid #ffffff55;color:#fff}
+  .share-tip{text-align:center;color:#ccc3e0;font-size:11px;line-height:1.5}
+  /* Winner's actual, interactive prize selection */
+  .prize-section{margin:25px auto 0;text-align:left;width:100%;animation:appear .45s ease-out both}
+  .prize-section[hidden],.prize-confirmation[hidden],.prize-picker[hidden]{display:none!important}
+  .prize-heading{text-align:center;font-size:13px;font-weight:850;letter-spacing:.06em;color:#f8e6ae;text-transform:uppercase;margin:0 0 13px}
+  .prize-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  button.prize-option{appearance:none;cursor:pointer;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;border:1.5px solid rgba(255,255,255,.24);color:#fff;border-radius:20px;padding:16px 13px;background:linear-gradient(145deg,rgba(52,209,218,.20),rgba(132,69,212,.24));font:inherit;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+  button.prize-option:hover{transform:translateY(-3px);border-color:#e7d3ff}button.prize-option:focus-visible,.confirm-prize:focus-visible{outline:3px solid #ffe5a3;outline-offset:3px}
+  button.prize-option[aria-pressed="true"]{border-color:#ffdf85;box-shadow:0 0 0 2px #ffdf854b,0 8px 25px #09062e80;background:linear-gradient(145deg,rgba(45,191,210,.35),rgba(115,71,184,.50))}
+  .prize-icon{font-size:27px;line-height:1}.prize-name{font-size:18px;font-weight:850;letter-spacing:-.04em;line-height:1.14}.prize-duration{padding:5px 9px;border-radius:99px;background:#ffffff24;font-size:11px;font-weight:820;color:#ffe6a5}.prize-extra{font-size:11px;line-height:1.45;color:#ded9ed}
+  .confirm-prize{display:block;width:100%;border:0;border-radius:14px;margin:15px 0 0;padding:15px 12px;background:linear-gradient(110deg,#ffecac,#ffd16b);color:#24163b;font:inherit;font-size:14px;font-weight:850;cursor:pointer;box-shadow:0 10px 28px #14102e72;transition:filter .18s}.confirm-prize:disabled{filter:grayscale(.8);opacity:.55;cursor:not-allowed}
+  .prize-caveat{color:#d7caed;font-size:11px;text-align:center;line-height:1.45;margin:11px 0 0}.prize-confirmation{text-align:center;background:linear-gradient(135deg,#47cdb823,#ecc96622);border:1px solid #ffdc9373;border-radius:20px;padding:18px 12px;margin-top:10px}.confirmed-mark{font-size:25px;margin-bottom:5px}.confirmed-name{font-size:21px;font-weight:900;letter-spacing:-.04em}.confirmed-detail{font-size:12px;color:#eee0f8;line-height:1.5;margin:9px auto 0;max-width:290px}
+  @keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:390px){.prize-options{gap:8px}.prize-name{font-size:16px}button.prize-option{padding:12px 10px}.prize-icon{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="orbs" aria-hidden="true"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div></div>
+<div class="page">
+  <div class="brand"><div class="brand-mark" aria-hidden="true">✦</div><div>РОЗЫГРЫШ <span class="brand-name">/ Приз на выбор</span></div></div>
+  <main id="card" class="glass" aria-live="polite">
+    <section id="entry" hidden>
+      <div class="medallion" aria-hidden="true" style="font-size:60px">🎁</div>
+      <div class="eyebrow">Sayfiddinov™ giveaway</div>
+      <h2 class="entry-title">Привет! Как тебя зовут?</h2>
+      <p class="entry-info">Введи своё имя, чтобы испытать удачу. После этого начнётся проверка билета — примерно 6 секунд.</p>
+      <form id="name-form"><label class="entry-label" for="participant-name">Имя участника</label>
+      <input id="participant-name" class="entry-input" name="name" placeholder="Например, Нурисломбек" minlength="2" maxlength="60" autocomplete="name" required>
+      <button id="start-btn" class="entry-submit" type="submit">✨ Проверить мой билет</button>
+      <p id="entry-error" class="entry-error" aria-live="polite"></p></form>
+    </section>
+    <div id="result-body" hidden>
+    <div id="eyebrow" class="eyebrow">ВАШ СЧАСТЛИВЫЙ БИЛЕТ</div>
+    <div id="symbol" class="medallion"></div>
+    <h1 id="headline">Проверяем <span class="accent">ваш билет...</span></h1>
+    <p id="detail" class="description">Момент истины уже близко ✨</p>
+    <div id="loading-progress" hidden><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div><p id="progress-state" class="progress-state">Проверяем QR-код…</p></div>
+    <div id="result-id" class="result-id" hidden></div>
+
+    <section id="prize-section" class="prize-section" hidden aria-labelledby="prize-heading">
+      <div id="prize-picker" class="prize-picker">
+        <p id="prize-heading" class="prize-heading">Выбери один из двух призов</p>
+        <div class="prize-options" role="group" aria-label="Выбор подписки">
+          <button type="button" class="prize-option" data-prize="canva" aria-pressed="false">
+            <span class="prize-icon" aria-hidden="true">🎨</span><span class="prize-name">Canva Pro</span><span class="prize-duration">1 месяц</span>
+            <span class="prize-extra">Дизайн, шаблоны и творческие проекты</span>
+          </button>
+          <button type="button" class="prize-option" data-prize="gemini" aria-pressed="false">
+            <span class="prize-icon" aria-hidden="true">✦</span><span class="prize-name">Gemini Pro</span><span class="prize-duration">18 месяцев</span>
+            <span class="prize-extra">ИИ для учёбы и творческих задач</span>
+          </button>
+        </div>
+        <button type="button" class="confirm-prize" id="confirm-prize" disabled>Подтвердить выбор</button>
+        <p class="prize-caveat">Один победитель — один приз. После выбора покажи оригинал билета организатору.</p>
+      </div>
+      <div class="prize-confirmation" id="prize-confirmation" hidden aria-live="polite">
+        <div class="confirmed-mark" aria-hidden="true">🏆</div>
+        <div class="prize-heading">ТВОЙ ВЫБОР</div>
+        <div class="confirmed-name" id="confirmed-name"></div>
+        <p class="confirmed-detail">Покажи этот экран и оригинальный бумажный билет организатору. Подписка выдаётся организатором, а не автоматически.</p>
+        <div id="share-actions" class="share-actions">
+          <a id="share-telegram" class="share-btn" target="_blank" rel="noopener noreferrer" href="#">✈️ Написать @Sayfiddinovm</a>
+          <button id="copy-result" class="share-btn secondary" type="button">📋 Скопировать доказательство</button>
+          <div class="share-tip">Откроется чат @Sayfiddinovm с готовой заявкой. Проверь данные и нажми «Отправить». Само сообщение автоматически не отправляется.</div>
+        </div>
+      </div>
+    </section>
+    <div id="chip" class="chip"><span class="spark">✦</span><span>Canva Pro на 1 месяц или Gemini Pro на 18 месяцев</span></div>
+    </div>
+  </main>
+  <p id="hint" class="hint">Один из QR-кодов содержит выигрыш. Удачи!</p>
+  <div class="foot"><span>✧</span><span>Розыгрыш для одногруппников · Не является официальной акцией Canva или Google</span><span>✧</span></div>
+</div>
+<div id="confetti" aria-hidden="true"></div>
+<script>
+'use strict';
+const CAMPAIGN = {"version":4,"title":"\u041f\u0440\u0438\u0437 \u043d\u0430 \u0432\u044b\u0431\u043e\u0440: Canva Pro \u0438\u043b\u0438 Gemini Pro","siteHost":"gemini.sayfiddinov.site","winnerHash":"7e53785f08df731a03ef6a8188f33deeb873c412083e9b9fd1f8b5b58f5904e7","validHashes":["7e53785f08df731a03ef6a8188f33deeb873c412083e9b9fd1f8b5b58f5904e7","cab6e9ab10b7952c5eb641ef309d19d7d7dd7da6f773e969a53782e72d1d06b9","3338d297943f1291afa23468c9faac0fed09a44631405f6f49b1c64052854690","4411aa8cda68c583bfb175da4ce8263298e98cfacec7e8e3910bc04d289374c1","ea957e092347d9ac5d911e2d681345216b505ed0c7b87248bb4517d049cbefc3","dbddcc41d40a27bea65bd121333b4a37d24b3416b1d99d5bed103d87be73a2fb","2225ee2c83452764700b5a8ef1027a0b04f274f04d7581028c9d7e2455c444ba","0b474219ae326c70178365e1190977d0c288cf9bfa5924190d314fae59aa303c","022aad90ee9e6c9d6d3ff8451da4375f0d9cafa5699e7ee6451878e4084ef45e","88bd18e35f220cb7280dad67c4bfcf93a54ed5193f2cc1414dfaf9ff28c27371","d4a454fa2d8b4fc8197407f40a2ee4ed9cb095e2f0ff31fafff698222691233c","f62ab58ccc0106b522fe3dfbd9fc750f5145e52ba2f8e08118400df4d9f6fb96","0378cbc6d94f645f8b38bd6cde88e054fd9a31ef87a540ea7ebdf56b49d3a86c","b8c546c425cb305082405b11d8fa0d5c87ee3f03019b077af88c53037f41629a","71e03d2506066184f1c4a3b2611e790d19a6f80c065c17b4d711ad672f5490e6","5809413d645647f5d37eea11e5d095377e7367edc64de7fce039a197add6ec81","99a8a1ca0bb7ae7adc28c939fdf332c01b01fdf2b541b59f20ee79d257ae5123","525db99788cef7ee5a64ca17a542722cb7521114c50b503b3eb5aded905bc6a8","216af09d45dac671aea2180cb168a09136317b7bb980c8c8e51f19f947a000a0","ed9588f2f6752ff811490f161637020c94d468f53695ba88807c41d5b9932458","0dbf3942de5482d72312209626caf9662dc1af65c0add15872533de5ebae5b2a","b2935df904a269c983e4d65c67565167a7d4c2cd6050a88060e4027a68c98c28","48aad3c206f074fc48df0878e5fa1d7e77b7d4866055e0fc7816436ae5372f41","c26a647251e543183eb2e61a7e2a863fe9e95c68ea0be1d7177b3baca9d3352b","9ece0ad8cdd93a27b55f5db90d979419e38a79b0245f0dda35d0378637cdbee6","562b09c63dadb4e19dc2dbc11079bbe3df02e1c878f53e0e42fd40878cd8993a","4254f73c47315d45c7324b74bd9b0172524c0c234537274bbbad60e0787a27f0","26c8cf481692ba7c8e856807760b7dfb44c075c305f62bb4189dc5f2ad3c9690","e2970f6fb3f3954517f9b49cd57425cc9553c2586549f1f5685cbb82d8c0ab97","39713bafa8df646edb93ed5c9a776aacb779a2df8022e4b8aa5da2e3d720414e"],"ticketProofs":{"7e53785f08df731a03ef6a8188f33deeb873c412083e9b9fd1f8b5b58f5904e7":"209b8260567500e52b31e35c150070c82d0bfd9f5fcec514083118f32057179b","cab6e9ab10b7952c5eb641ef309d19d7d7dd7da6f773e969a53782e72d1d06b9":"fe82c5fcbe0d5696822553e30a4900d304df189f3c1ac40faf4f7b3cdcae870c","3338d297943f1291afa23468c9faac0fed09a44631405f6f49b1c64052854690":"0ac95cd857d22192bab82148330dcd9741e93ade27c67feeef175054462b4c24","4411aa8cda68c583bfb175da4ce8263298e98cfacec7e8e3910bc04d289374c1":"f0da366a1372cf196ace28973bb1301b20b55bb770791e29449f5d2572605d7a","ea957e092347d9ac5d911e2d681345216b505ed0c7b87248bb4517d049cbefc3":"1be1dc52cdefabb33b2a3b6f7fd93b61e53b6f06ee26bae5cc33f012c15c2719","dbddcc41d40a27bea65bd121333b4a37d24b3416b1d99d5bed103d87be73a2fb":"d093104313357bb8a48953a5ee9e0774b75226c873a5df6e15bb0ee8d5138b59","2225ee2c83452764700b5a8ef1027a0b04f274f04d7581028c9d7e2455c444ba":"bd5a0d2b83b45a8d37555180d985df34befd6dc151a35f26620219416717bce6","0b474219ae326c70178365e1190977d0c288cf9bfa5924190d314fae59aa303c":"ef972fe0836ce51454f777f5e6dec4c7bf32b706fe80922e11bd6e92e3693379","022aad90ee9e6c9d6d3ff8451da4375f0d9cafa5699e7ee6451878e4084ef45e":"96721f29b4cf702edc2be09b251c41ddd437a18c3d0ac41b538a80810fd4999a","88bd18e35f220cb7280dad67c4bfcf93a54ed5193f2cc1414dfaf9ff28c27371":"f5e1c7b62a367ba5e1d85950dee4628691a8b0d2dac61bb0836256ac7d3e8c1a","d4a454fa2d8b4fc8197407f40a2ee4ed9cb095e2f0ff31fafff698222691233c":"378e9683eb56b8c0acfa0668c5fadc8ddea19bca948e05c439b79bd2300bd3c4","f62ab58ccc0106b522fe3dfbd9fc750f5145e52ba2f8e08118400df4d9f6fb96":"7574dc36282b6450300a21ba7c688687165c1d0b98f8637f0b9bc69d4f131f56","0378cbc6d94f645f8b38bd6cde88e054fd9a31ef87a540ea7ebdf56b49d3a86c":"9626547fceb979a6e371976cd3f01577873354a73bce697d45910f864eba44f4","b8c546c425cb305082405b11d8fa0d5c87ee3f03019b077af88c53037f41629a":"f2e73bc55f86a38307f2636ace84e95d577cc4e0b9f3ddf5c780216dbba679b6","71e03d2506066184f1c4a3b2611e790d19a6f80c065c17b4d711ad672f5490e6":"cfc13776c7bb759102081a6ffdb14eb9b189e959d1546c8b134158057976a1cf","5809413d645647f5d37eea11e5d095377e7367edc64de7fce039a197add6ec81":"5eae26d6836f7def2d9daa496facd87379eba8e5d41dc0e006a5aacc2d882add","99a8a1ca0bb7ae7adc28c939fdf332c01b01fdf2b541b59f20ee79d257ae5123":"f1cb8b8ad744df9bb2fb5e6156c6c7afdd7ad471223fb23d73bab0fb01d5c262","525db99788cef7ee5a64ca17a542722cb7521114c50b503b3eb5aded905bc6a8":"646f7c80216632f2269f3047b71acc13f89cf952ecd24a2f8f5513e541d249b1","216af09d45dac671aea2180cb168a09136317b7bb980c8c8e51f19f947a000a0":"35e340a74cfa114e7fcbb4ce35804a8cd442290b2ef3c3e6bb9d6f93aef54e1a","ed9588f2f6752ff811490f161637020c94d468f53695ba88807c41d5b9932458":"52f9a1a8fe7821c0e47dffc9add303e6ac48354ee23a156e663d1608463966bb","0dbf3942de5482d72312209626caf9662dc1af65c0add15872533de5ebae5b2a":"295adabda65ed709d72b96ac562bfdad2f418c705ae1f663315b48ebbf5399f5","b2935df904a269c983e4d65c67565167a7d4c2cd6050a88060e4027a68c98c28":"dbb58e981383c6acb108702c70c8399b134bcc030292224832ab323ec1dca3ce","48aad3c206f074fc48df0878e5fa1d7e77b7d4866055e0fc7816436ae5372f41":"6adfd3d1b9678a89632d10264b2be99e004c3bd350df33b2eb61d0f2ec128d37","c26a647251e543183eb2e61a7e2a863fe9e95c68ea0be1d7177b3baca9d3352b":"5b2e43ec3c6ee00fd87bcc0c056c09c824499f6fc30bdf1a7cc88c6a51ac74c1","9ece0ad8cdd93a27b55f5db90d979419e38a79b0245f0dda35d0378637cdbee6":"1d7e8ea5f2eac6c9cef9d70e269fc2c692c68b57e7749572f91320a267655c26","562b09c63dadb4e19dc2dbc11079bbe3df02e1c878f53e0e42fd40878cd8993a":"6aaf8cda58edaf64331f3bcf2b4cd14206782f2569962769c92bf86528ef4664","4254f73c47315d45c7324b74bd9b0172524c0c234537274bbbad60e0787a27f0":"4e2063719f0015760d7411db086c69079c52071d6e02d5c7dc963a505644c5c1","26c8cf481692ba7c8e856807760b7dfb44c075c305f62bb4189dc5f2ad3c9690":"280937549e2fc93ce5d3ba45a2ebf3acdee075c7c996007a64ae7d33b6e10746","e2970f6fb3f3954517f9b49cd57425cc9553c2586549f1f5685cbb82d8c0ab97":"4013a4e7ef8e5748efda42f47888684c73dcab69af94e26a711af0612647daec","39713bafa8df646edb93ed5c9a776aacb779a2df8022e4b8aa5da2e3d720414e":"a6a41efab9d2d7a380710322cd499387512f89eb787f90916d4816c9b5b58d25"}};
+const ICONS = {
+  wait:'<svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M38 7l5.5 19.5L63 32l-19.5 5.5L38 57l-5.5-19.5L13 32l19.5-5.5L38 7Z" fill="#CFB4FF" stroke="#fff" stroke-width="2"/><path d="M59 49l3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9Z" fill="#9AF3FF"/></svg>',
+  win:'<svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 13h38v20c0 18-9 26-19 26s-19-8-19-26V13Z" fill="#fff7d0" stroke="#9f662a" stroke-width="3"/><path d="M19 20H8v9c0 11 6 16 16 17M57 20h11v9c0 11-6 16-16 17" stroke="#9f662a" stroke-width="4" stroke-linecap="round"/><path d="M31 65h14m-7-6v6M29 69h18" stroke="#9f662a" stroke-width="4" stroke-linecap="round"/><path d="m38 21 3.4 8.3 9 .7-7 6 2.2 9-7.6-4.7-7.6 4.7 2.2-9-7-6 9-.7L38 21Z" fill="#f5b640"/></svg>',
+  lose:'<svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 47c9-21 43-21 52 0" stroke="#c1aafa" stroke-width="4" stroke-linecap="round"/><circle cx="26" cy="30" r="4" fill="#dbcfff"/><circle cx="50" cy="30" r="4" fill="#dbcfff"/><path d="m15 14 3.5 5.5L25 23l-6.5 3.5L15 33l-3.5-6.5L5 23l6.5-3.5L15 14Z" fill="#b9f6ff"/><path d="m61 5 2.8 6.2L70 14l-6.2 2.8L61 23l-2.8-6.2L52 14l6.2-2.8L61 5Z" fill="#edb6f5"/></svg>',
+  invalid:'<svg viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="15" width="46" height="46" rx="11" stroke="#e5d6ff" stroke-width="4"/><path d="M38 26v15" stroke="#e5d6ff" stroke-width="5" stroke-linecap="round"/><circle cx="38" cy="50" r="3" fill="#e5d6ff"/></svg>'
+};
+const $=id=>document.getElementById(id);
+const urlParams=new URLSearchParams(location.search);
+const token=urlParams.get('t');const claimedId=urlParams.get('id')||'';
+const PRIZES={canva:{name:'Canva Pro',duration:'1 месяц'},gemini:{name:'Gemini Pro',duration:'18 месяцев'}};
+let participantName='',digest='',ticketId='',result='',selectedPrize='';
+const stateKey='sf_giveaway_choice_v5_';
+function display(mode,headline,highlight,detail,eyebrow,hint){
+  $('entry').hidden=true;$('result-body').hidden=false;
+  $('card').className='glass '+mode;
+  $('eyebrow').textContent=eyebrow;
+  $('symbol').innerHTML=ICONS[mode]||ICONS.wait;
+  $('headline').innerHTML=headline+' <span class="accent">'+highlight+'</span>';
+  $('detail').textContent=detail;$('hint').textContent=hint;
+  $('chip').hidden=mode==='win'||mode==='invalid'||mode==='loading';
+  $('prize-section').hidden=mode!=='win';
+  $('loading-progress').hidden=mode!=='loading';
+  $('result-id').hidden=!ticketId||mode==='loading';
+  $('result-id').textContent=ticketId;
+}
+function confetti(){
+  const area=$('confetti');
+  const colors=['#faf0aa','#88ecdb','#9bf2ff','#df9bf6','#fff','#f5b4ba'];
+  for(let i=0;i<90;i++){
+    const p=document.createElement('i');p.className='piece';p.style.setProperty('--x',(Math.random()*100)+'vw');p.style.setProperty('--c',colors[i%colors.length]);p.style.setProperty('--dur',(3.4+Math.random()*3)+'s');p.style.setProperty('--dx',(Math.random()*220-110)+'px');p.style.setProperty('--r',(Math.random()*220)+'deg');p.style.animationDelay=(Math.random()*.95)+'s';area.appendChild(p);
+  }
+  setTimeout(()=>area.replaceChildren(),8200);
+}
+async function sha256(s){const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(bytes),x=>x.toString(16).padStart(2,'0')).join('')}
+// The printed ID is a 10-character base36 digest of the website host and secret ticket token.
+// Moving the QR URL to another domain therefore invalidates the printed ID.
+async function domainBoundId(hostname,token){
+  const hex=await sha256('Sayfiddinov|'+hostname.toLowerCase()+'|'+token);
+  const code=(BigInt('0x'+hex.slice(0,16))%(36n**10n)).toString(36).toUpperCase().padStart(10,'0');
+  return 'Pro-'+code;
+}
+
+function showConfirmedPrize(id){
+  if(!PRIZES[id])return;
+  selectedPrize=id;$('prize-section').hidden=false;$('prize-picker').hidden=true;$('prize-confirmation').hidden=false;
+  $('confirmed-name').textContent=PRIZES[id].name+' · '+PRIZES[id].duration;
+  $('hint').textContent='Покажи оригинальный бумажный билет и отправь результат организатору.';
+  // This is a proof of possession, not a server-issued certificate.
+  // The organizer verifies the original ticket URL in the private organizer panel.
+  const ticketUrl=new URL(location.href);
+  ticketUrl.search='';ticketUrl.hash='';
+  ticketUrl.searchParams.set('t',token);
+  ticketUrl.searchParams.set('id',ticketId);
+  const message=[
+    '🏆 ЗАЯВКА ПО РОЗЫГРЫШУ SAYFIDDINOV™',
+    '',
+    'Здравствуйте! Я выиграл(а) приз в розыгрыше.',
+    '👤 Имя: '+participantName,
+    '🎟 ID билета: '+ticketId,
+    '✅ Результат на сайте: ПОБЕДА',
+    '🎁 Выбранный приз: '+PRIZES[id].name+' — '+PRIZES[id].duration,
+    '',
+    '🔗 Ссылка для проверки подлинности билета:',
+    ticketUrl.href,
+    '',
+    '📋 Проверка: откройте ссылку в панели организатора и сверяйте ID с оригиналом бумажного билета.',
+    '⚠️ Прошу проверить билет перед выдачей приза.'
+  ].join('\n');
+  // Telegram's documented username link opens this exact chat with the draft text.
+  $('share-telegram').href='https://t.me/Sayfiddinovm?text='+encodeURIComponent(message);
+  $('share-telegram').setAttribute('aria-label','Открыть чат @Sayfiddinovm с готовой заявкой');
+  $('copy-result').dataset.message=message;
+}
+function openPrizePicker(){
+  $('prize-section').hidden=false;$('prize-picker').hidden=false;$('prize-confirmation').hidden=true;
+  $('confirm-prize').disabled=true;selectedPrize='';
+  document.querySelectorAll('.prize-option').forEach(button=>button.setAttribute('aria-pressed','false'));
+  try{const saved=JSON.parse(localStorage.getItem(stateKey+digest)||'null');if(saved&&PRIZES[saved.prize])showConfirmedPrize(saved.prize)}catch(e){}
+}
+document.querySelectorAll('.prize-option').forEach(button=>button.addEventListener('click',()=>{
+  selectedPrize=button.dataset.prize;document.querySelectorAll('.prize-option').forEach(x=>x.setAttribute('aria-pressed',String(x===button)));
+  $('confirm-prize').disabled=false;$('confirm-prize').textContent='Выбрать '+PRIZES[selectedPrize].name;
+}));
+$('confirm-prize').addEventListener('click',()=>{
+  if(result!=='win'||!PRIZES[selectedPrize])return;
+  try{localStorage.setItem(stateKey+digest,JSON.stringify({name:participantName,prize:selectedPrize,id:ticketId}))}catch(e){}
+  showConfirmedPrize(selectedPrize);
+});
+$('copy-result').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText($('copy-result').dataset.message);$('copy-result').textContent='✓ Доказательство скопировано!'}catch(e){$('copy-result').textContent='Не удалось скопировать — отправь через Telegram';}
+});
+const statusMessages=['Считываем билет…','Проверяем уникальный код…','Проверяем результат розыгрыша…','Финальная проверка…'];
+$('name-form').addEventListener('submit',async e=>{
+  e.preventDefault();const name=$('participant-name').value.replace(/\s+/g,' ').trim();
+  if(name.length<2||name.length>60){$('entry-error').textContent='Введи имя от 2 до 60 символов.';return}
+  participantName=name;$('entry-error').textContent='';$('start-btn').disabled=true;
+  digest='';ticketId='';result='';
+  display('loading','Проверяем','твой билет…','Момент истины уже близко ✨','ПРОВЕРКА БИЛЕТА','Подождём всего 6 секунд, чтобы узнать результат.');
+  $('progress-fill').classList.remove('running');void $('progress-fill').offsetWidth;$('progress-fill').classList.add('running');
+  let stage=0;const iv=setInterval(()=>{$('progress-state').textContent=statusMessages[Math.min(++stage,statusMessages.length-1)]},1550);
+  try{
+    const [computed]=await Promise.all([sha256(token),new Promise(r=>setTimeout(r,6000))]);digest=computed;
+    ticketId=claimedId;
+    const proof=await sha256(token+'|'+claimedId);
+    clearInterval(iv);
+    if(!CAMPAIGN.validHashes.includes(digest)|| !/^Pro-[A-Z0-9]{10}$/.test(claimedId) || proof!==CAMPAIGN.ticketProofs?.[digest]){
+      ticketId='';display('invalid','Билет','не найден','Этот QR-код не относится к розыгрышу.','НЕВЕРНЫЙ БИЛЕТ','Обратись к организатору за правильным билетом.');return;
+    }
+    if(digest===CAMPAIGN.winnerHash){
+      result='win';display('win','Ты','победитель!',participantName+', поздравляем! Тебе достался приз на выбор.','🏆 ДЖЕКПОТ · ПОЗДРАВЛЯЕМ','Выбери подписку и покажи билет организатору.');openPrizePicker();confetti();
+    }else{result='lose';display('lose','В этот раз','не повезло',participantName+', спасибо за участие! Возможно, в следующий раз повезёт именно тебе.','СПАСИБО ЗА УЧАСТИЕ','Сохрани этот билет на память 💜');}
+  }catch(e){clearInterval(iv);display('invalid','Ошибка','проверки','Не удалось проверить билет. Попробуй позже.','ОШИБКА','Для проверки требуется HTTPS и современный браузер.');}
+});
+if(!CAMPAIGN.siteHost || location.hostname.toLowerCase()!==CAMPAIGN.siteHost){display('invalid','Домен','не совпадает','Билет привязан к другому адресу сайта. Организатор должен указать домен в панели, скачать index.html и опубликовать его на этом адресе.','ПРОВЕРКА ДОМЕНА','Этот сайт не принимает билеты для другого домена.');}
+else if(!token){display('wait','Твоя удача','начинается здесь','Отсканируй уникальный QR-код с бумажного билета.','РОЗЫГРЫШ ПРИЗА','Каждому участнику — один уникальный билет.');}
+else if(!/^[a-zA-Z0-9_-]{18,64}$/.test(token)||!globalThis.crypto?.subtle){display('invalid','Билет','не найден','Ссылка некорректна или не поддерживается браузером.','ОШИБКА','Попроси организатора проверить билет.');}
+else{$('entry').hidden=false;$('result-body').hidden=true;$('hint').textContent='Твоё имя используется только для отображения и сообщения, которое ты сам отправишь в Telegram.';}
+
+</script>
+</body>
+</html>
